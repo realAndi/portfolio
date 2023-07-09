@@ -1,0 +1,19 @@
+body {
+  transition: background-color 0.2s ease-in-out;
+}
+
+body.Name {
+  background-color: #000000;
+}
+
+body.Skills {
+  background-color: #150050;
+}
+
+body.Projects {
+  background-color: #3F0071;
+}
+
+body.Contact {
+  background-color: #971346;
+}

@@ -2,23 +2,30 @@ import React, { useState } from 'react';
 import { useSpring, animated } from 'react-spring';
 import { useGesture } from 'react-use-gesture';
 
-function AnimatedCard({ title, zIndex, y, animateCard, isTopCard }) {
+function AnimatedCard({ title, suit, desc, zIndex, y, animateCard, isTopCard }) {
     const [{ x }, set] = useSpring(() => ({ x: 0, config: { tension: 300, friction: 30 } }));
     const [swiped, setSwiped] = useState(false);
     const [lastDirection, setLastDirection] = useState(0);
+    console.log(title, suit, desc)
+    function preventBodyScroll(prevent) {
+        document.body.style.overflow = prevent ? 'hidden' : '';
+      }
 
-    const bind = useGesture({
+      const bind = useGesture({
+        onDragStart: () => {
+            preventBodyScroll(true);
+        },
         onDrag: ({ down, movement: [mx], vxvy: [vx] }) => {
             let direction = Math.sign(mx);
             if (direction !== lastDirection) {
                 setSwiped(false);
                 setLastDirection(direction);
             }
-  
+    
             if (Math.abs(mx) > 100 || Math.abs(vx) > 3) {
                 setSwiped(true);
             }
-  
+    
             let movedX = down ? mx : 0;
             set({ x: movedX, immediate: down });
         },
@@ -30,8 +37,10 @@ function AnimatedCard({ title, zIndex, y, animateCard, isTopCard }) {
             } else {
                 set({ x: 0 });
             }
+            preventBodyScroll(false);
         },
     }, { rubberbandIfOutOfBounds: true });
+    
 
     return (
         <animated.div
@@ -42,10 +51,14 @@ function AnimatedCard({ title, zIndex, y, animateCard, isTopCard }) {
                 transform: x.to(x => `translate3d(${x}px, ${y}px, 0) rotateZ(${x / window.innerWidth * 45}deg)`),
             }}
         >
-            <h1>{title}</h1>
-            <p>This is a card about {title}</p>
+            <div className="card-header">
+                <h1>{title}</h1>
+                <h1 className="card-suit">{suit}</h1>
+            </div>
+            <p>{desc}</p>
         </animated.div>
     );
+      
 }
 
   
