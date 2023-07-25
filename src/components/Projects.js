@@ -12,7 +12,18 @@ const Projects = () => {
     };
   }, []);
 
-  return <div className="Projects">This is the Projects component</div>;
-};
+  const cardContent = (
+    <div className="title">This is the Projects component</div>
+  );
+
+  const columnOneContent = (
+    <div className="rowContent">This is column one content for Projects</div>
+  );
+
+  const columnTwoContent = (
+    <div className="rowContent">This is column two content for Projects</div>
+  );
+
+  return { cardContent, columnOneContent, columnTwoContent };};
 
 export default Projects;

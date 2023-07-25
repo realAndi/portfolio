@@ -1,17 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSpring, animated } from 'react-spring';
 import { useGesture } from 'react-use-gesture';
 
-function AnimatedCard({ title, suit, desc, zIndex, y, animateCard, isTopCard }) {
+function AnimatedCard({ title, suit, desc, zIndex, y, x: propX, animateCard, isTopCard }) {
     const [{ x }, set] = useSpring(() => ({ x: 0, config: { tension: 300, friction: 30 } }));
     const [swiped, setSwiped] = useState(false);
     const [lastDirection, setLastDirection] = useState(0);
-    console.log(title, suit, desc)
+
+    useEffect(() => {
+        set({ x: propX });
+    }, [propX, set]);
+    
     function preventBodyScroll(prevent) {
         document.body.style.overflow = prevent ? 'hidden' : '';
-      }
+    }
 
-      const bind = useGesture({
+    const bind = useGesture({
         onDragStart: () => {
             preventBodyScroll(true);
         },
@@ -58,9 +62,6 @@ function AnimatedCard({ title, suit, desc, zIndex, y, animateCard, isTopCard }) 
             <p>{desc}</p>
         </animated.div>
     );
-      
 }
 
-  
-    
 export default AnimatedCard;

@@ -17,3 +17,13 @@ body.Projects {
 body.Contact {
   background-color: #971346;
 }
+
+
+.title {
+  font-size: 2.4em;
+}
+
+.rowContent {
+  margin: 10px 0;
+  font-size: 1.2em;
+}

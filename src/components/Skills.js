@@ -12,7 +12,18 @@ const Skills = () => {
     };
   }, []);
 
-  return <div className="Skills">This is the Skills component</div>;
-};
+  const cardContent = (
+    <div className="title">This is the Skills component</div>
+  );
+
+  const columnOneContent = (
+    <div className="rowContent">This is column one content for Skills</div>
+  );
+
+  const columnTwoContent = (
+    <div className="rowContent">This is column two content for Skills</div>
+  );
+
+  return { cardContent, columnOneContent, columnTwoContent };};
 
 export default Skills;
