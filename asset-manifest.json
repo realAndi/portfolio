@@ -1,15 +1,26 @@
 {
   "files": {
-    "main.css": "/portfolio/static/css/main.5d234f66.css",
-    "main.js": "/portfolio/static/js/main.b415294b.js",
+    "main.css": "/portfolio/static/css/main.bb3d4cfc.css",
+    "main.js": "/portfolio/static/js/main.3c77bebd.js",
     "static/js/787.37faa4c4.chunk.js": "/portfolio/static/js/787.37faa4c4.chunk.js",
+    "static/media/profile_pic.jpg": "/portfolio/static/media/profile_pic.fe2c168b9307c56c7902.jpg",
+    "static/media/AWS.svg": "/portfolio/static/media/AWS.482ae98bd199aa096dfaa67074122abb.svg",
+    "static/media/angularjs.svg": "/portfolio/static/media/angularjs.230cf8a021880f54d3e764ca2b5b4b83.svg",
+    "static/media/nodejs.svg": "/portfolio/static/media/nodejs.b7d2308b16bd82b67987d0d1682f8e6b.svg",
+    "static/media/vuejs.svg": "/portfolio/static/media/vuejs.106cfd94dfde71c5f6010885d13fdd7e.svg",
+    "static/media/react.svg": "/portfolio/static/media/react.a060cbe85e50deda1d61452cee9de5b2.svg",
+    "static/media/tailwind.svg": "/portfolio/static/media/tailwind.01b29a820264ccd5809848de8be41084.svg",
+    "static/media/javascript.svg": "/portfolio/static/media/javascript.081325c6f229605dce15142ddd948d6d.svg",
+    "static/media/arrows.svg": "/portfolio/static/media/arrows.72f7f35c62cb4bad1da7d1dafb457a5e.svg",
     "index.html": "/portfolio/index.html",
-    "main.5d234f66.css.map": "/portfolio/static/css/main.5d234f66.css.map",
-    "main.b415294b.js.map": "/portfolio/static/js/main.b415294b.js.map",
+    "static/media/figma.svg": "/portfolio/static/media/figma.44ca2c329ade686d78f62ad73790c621.svg",
+    "static/media/firebase.svg": "/portfolio/static/media/firebase.c55df03130647cc8ee934a0a6ebecf70.svg",
+    "main.bb3d4cfc.css.map": "/portfolio/static/css/main.bb3d4cfc.css.map",
+    "main.3c77bebd.js.map": "/portfolio/static/js/main.3c77bebd.js.map",
     "787.37faa4c4.chunk.js.map": "/portfolio/static/js/787.37faa4c4.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.5d234f66.css",
-    "static/js/main.b415294b.js"
+    "static/css/main.bb3d4cfc.css",
+    "static/js/main.3c77bebd.js"
   ]
 }
