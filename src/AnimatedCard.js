@@ -56,7 +56,7 @@ function AnimatedCard({ title, suit, desc, zIndex, y, x: propX, animateCard, isT
             }}
         >
             <div className="card-header">
-                <h1>{title}</h1>
+                <h1 classNAme="titleHeader">{title}</h1>
                 <h1 className="card-suit">{suit}</h1>
             </div>
             <p>{desc}</p>

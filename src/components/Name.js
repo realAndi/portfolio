@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Components.css';
+import profilePic from './assets/profile_pic.jpg';
 
 const Name = () => {
   useEffect(() => {
@@ -12,12 +13,13 @@ const Name = () => {
     };
   }, []);
 
-  const cardContent = (
-    <div className="title">Hello my name is Andi</div>
-  );
-
-  const columnOneContent = (
-    <div className="rowContent">
+  return (
+    <div className="col">
+      <div className="title">
+        <img src={profilePic} className="profile-pic" alt="profile"/>
+        Hello, my name is Andi
+      </div>
+      <div className="rowContent">
     Lets get straight to the point, to answer the "What's your biggest weakness" question in interviews, mine would simply be self-introductions. For me they are difficult to 
     write or speak without sounding egotistical. So with all of that in mind, lets  start with my name, Andi, I am an Albanian-American Front-end Web developer, specializing in ReactJS and Flutter, and I am deeply passionate about web development.
     I recently completed my BA in Computer Science from Pace University, leaving a lasting legacy as the former president of the Albanian SWE club.
@@ -35,19 +37,14 @@ const Name = () => {
     I am deeply grateful for her presence in my life. Yoonie, I love you.
 
     </div>
-  );
-  
-  const columnTwoContent = (
     <div className="rowContent">
       If you were to ask me personally what I'm enjoying right now, it would be working with AI. I'm not sure why many developers will tell you that it isn't helpful, but in my experience, it's like having
       a personal sideman that will watch you code. For a good amount of my projects and work, I've been using AI to critique my own code as well as spot easy to miss errors. I believe that we are 
       currently facing a divide of work styles. Some developers will perform better with an AI sideman, and some developers simply refuse to change work-habits. I like to believe myself to be always adapting to changes. 
       Where whatever new comes out, I will get right on it, just in case it becomes more popular than it is.
     </div>
+    </div>
   );
-  
-
-  return { cardContent, columnOneContent, columnTwoContent };
 };
 
 export default Name;

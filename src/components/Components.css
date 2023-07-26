@@ -20,10 +20,143 @@ body.Contact {
 
 
 .title {
+  display: flex;
   font-size: 2.4em;
+  align-items: center;
 }
 
+.profile-pic {
+  border-radius: 50%;
+  width: 100px;
+  height: 100px; 
+  object-fit: cover;
+  margin-right: 20px; 
+}
+
+
 .rowContent {
+  display: flex;
+  flex-direction: column;
   margin: 10px 0;
   font-size: 1.2em;
+}
+
+.iconF {
+  margin-right: 25px;
+}
+
+.subRowContent {
+  display: flex;
+  position: relative;
+  align-items: center;
+  margin: 15px 5px;
+}
+
+.subColumn {
+  display: flex;
+  justify-content: space-between;
+}
+
+@media (max-width: 768px) {
+  .subColumn {
+    flex-direction: column;
+    align-items: center;
+  }
+  .subRowContent {
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+
+.image-container {
+  position: relative;
+  display: inline-block;
+}
+
+.heart {
+  position: absolute;
+  animation: float 2s linear infinite;
+  font-size: 16px;
+  opacity: 0;
+}
+
+.purple-btn {
+  display: inline-block;
+  padding: 12px 24px;
+  margin-top: 24px;
+  font-size: 16px;
+  max-width: 150px;
+  border: none;
+  color: white;
+  background-color: #6f0c32; 
+  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.538);
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+  align-self: center;
+}
+
+.purple-btn:hover {
+  background-color: #971346;
+}
+
+
+@keyframes float {
+  0% { opacity: 0; transform: translateY(0); }
+  50% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-50px); }
+}
+
+.additional-skills-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  z-index: 50;
+  animation: slideInDown 0.2s ease-out forwards;
+}
+
+@keyframes slideInDown {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.additional-skills-container {
+  background-color: #0f0039;
+  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.538);
+  padding: 10px 10px;
+  display: flex;
+}
+
+.columnContent {
+  max-width: 200px;
+  margin: 10px;
+  color: #fff;
+  text-align: center;
+  font-size: 16px;
+}
+
+
+@media (max-width: 768px) {
+  .subColumn{
+    align-items: center;
+  }
+  .columnContent {
+    max-width: 80%;
+    margin: 5px;
+    padding: 0 0;
+    font-size: 11px;
+  }
+
 }

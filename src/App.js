@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import StackCards from './StackCards';
+import ArrowSVG from './components/assets/arrows.svg';
 
 // import the components
 import Name from './components/Name';
@@ -18,7 +19,6 @@ const componentMap = {
 function App() {
   const [currentComponent, setCurrentComponent] = useState('Name');
   const CurrentComponent = componentMap[currentComponent];
-  const { cardContent, columnOneContent, columnTwoContent } = CurrentComponent();
 
   useEffect(() => {
     // Remove all applied classes from the body
@@ -39,23 +39,19 @@ function App() {
     <div className="app-container">
       <div className="content-container">
         <div className="component-container">
-          {cardContent}
-        </div>
-
-        <div className="row-one">
-          {columnOneContent}
-        </div>
-
-        <div className="row-two">
-          {columnTwoContent}
+          <CurrentComponent />
         </div>
       </div>
 
       <div className="card-stack-container">
         <StackCards setCurrentComponent={setCurrentComponent}/>
       </div>
+      <div className="desktop-hint-container">
+      <img src={ArrowSVG} className="svgHint" alt="Arrows" />
+        <p>Use the arrow keys to navigate the deck</p>
+      </div>
     </div>
-);
+  );
 
 }
 

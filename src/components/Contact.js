@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Components.css';
 
 const Contact = () => {
@@ -11,20 +11,17 @@ const Contact = () => {
       document.body.classList.remove('Contact');
     };
   }, []);
-
-  const cardContent = (
-    <div className="title">This is the Contact component</div>
+  return (
+    <div className="col">
+      <div className="title">This is the Contact component</div>
+      <div className="row-one">
+        <div className="rowContent">This is column one content for Contact</div>
+      </div>
+      <div className="row-two">
+        <div className="rowContent">This is column two content for Contact</div>
+      </div>
+    </div>
   );
-
-  const columnOneContent = (
-    <div className="rowContent">This is column one content for Contact</div>
-  );
-
-  const columnTwoContent = (
-    <div className="rowContent">This is column two content for Contact</div>
-  );
-
-  return { cardContent, columnOneContent, columnTwoContent };
 };
 
 export default Contact;
