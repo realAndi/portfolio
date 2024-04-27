@@ -1,25 +1,31 @@
+import React, { useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 import { HoverEffect } from "./ui/card-hover-effect";
+
+interface ProjectsProps {
+    id?: string;
+  }
 
 export const projects = [
     {
       title: "hvh.exchange",
       description:
         "A firebase project to share settings for the popular game CS:GO. This project goal is to make a reddit-like system with security in mind.",
-      link: "https://stripe.com",
+      link: "",
       tags: ["firebase", "react", "typescript", "nextjs"]
     },
     {
       title: "Newsletter Admin Panel",
       description:
         "An AWS Project to create a visual database viewer and an email builder. This project has remained unfinished indefintely.",
-      link: "https://stripe.com",
-      tags: ["aws dynamodb", "react"]
+      link: "",
+      tags: ["aws dynamodb", "lambda", "react"]
     },
     {
       title: "MaiNotes",
       description:
         "A react nextjs project that simply creates notes in rich text and stores locally. This project is currently under development.",
-      link: "https://stripe.com",
+      link: "",
       tags: ["react", "nextjs", "typescript", "tailwindcss"]
     },
     {
@@ -33,7 +39,7 @@ export const projects = [
         title: "Subreddit Stories Finder",
         description:
           "A python script to scrape reddit stories and make them to short video content. Utilizes OpenAI Whisper to generate subtitles and AWS TTS for the narration.",
-        link: "https://stripe.com",
+        link: "https://github.com/realAndi/SubRedditStoriesFinder",
         tags: ["python", "pandas", "nodejs", "openai", "aws"]
     },
     {
@@ -45,15 +51,37 @@ export const projects = [
     },
   ];
   
-
-export function Projects() {
-  return (
-    <div className="flex flex-col items-center justify-center">
-        <h1 className="text-2xl font-bold animate-load-in-from-top">My Projects</h1>
-        <div className="max-w-5xl mx-auto px-8">
-        <HoverEffect items={projects} />
-        </div>
-    </div>
-  );
-}
-export default Projects;
+  export function Projects({ id }: ProjectsProps) {
+    const ref = useRef(null);
+    const isInView = useInView(ref, { once: true });
+  
+    return (
+      <motion.div
+        ref={ref}
+        id={id}
+        className="flex flex-col items-center justify-center"
+        initial={{ opacity: 0 }}
+        animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+        transition={{ duration: 0.6, ease: 'easeOut' }}
+      >
+        <motion.h1
+          className="text-2xl font-bold"
+          initial={{ y: 50, opacity: 0 }}
+          animate={isInView ? { y: 0, opacity: 1 } : { y: 50, opacity: 0 }}
+          transition={{ duration: 0.6, ease: 'easeOut', delay: 0.2 }}
+        >
+          My Projects
+        </motion.h1>
+        <motion.div
+          className="max-w-5xl mx-auto px-8"
+          initial={{ y: 50, opacity: 0 }}
+          animate={isInView ? { y: 0, opacity: 1 } : { y: 50, opacity: 0 }}
+          transition={{ duration: 0.6, ease: 'easeOut', delay: 0.4 }}
+        >
+          <HoverEffect items={projects} />
+        </motion.div>
+      </motion.div>
+    );
+  }
+  
+  export default Projects;

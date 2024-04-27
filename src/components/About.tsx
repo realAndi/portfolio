@@ -1,103 +1,154 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, {useRef, useEffect } from 'react';
+import { motion, useInView, useAnimation } from 'framer-motion';
+
+const experiences = [
+  {
+    year: 2024,
+    events: [
+      'Designed Menu\'s for local restaurants and cafe\'s.',
+      'Published first NPM package for React, giving the ability to implement an Odometer easily onto any project',
+      'Self-taught Firebase and further into AWS, learning about back-end design and efficient data management',
+      'Bought my first car which I am very proud to write here',
+    ],
+  },
+  {
+    year: 2023,
+    events: [
+      'Started full time as a Data Analyst for MOT Restaurant Group',
+      'OpenAI released, developed many fun projects utilizing OpenAI\'s API',
+      'Graduated from Pace University, BA in Computer Science, Minor in Mathematics',
+      'Self-taught UI/UX Design, further strenghting my skills in Figma',
+      'Learned Web Scraping with Python and created a Reddit Web Scraper to get popular posts and make TikTok narration videos out of them',
+    ],
+  },
+  {
+    year: 2022,
+    events: [
+      'Developed first Android App as a part of my academic project, further strenghting my skills in Java',
+      'Completed all necessary Computer Science courses for my academic career',
+      'Data Analytics job offered full time position, starting early 2023.',
+    ],
+  },
+  {
+    year: 2021,
+    events: [
+      'Picked up part-time IT Help Desk job at a local company',
+      'Achieved Front End Development Internship, further enhancing React and NextJS skills',
+      'Started 2nd part-time job as a Data Analyst for a local restaurant company, further strenghting my skills and experience in SQL',
+      'Created the Albanian Software Engineering Club for all Albanian Students in Pace University',
+    ],
+  },
+  {
+    year: 2020,
+    events: [
+      'Started my academic career at Pace University, pursuing a BA in Computer Science',
+      'Discovered the world of Cloud Deployment with AWS',
+      'Learned the world of OOP and Data Structures',
+    ],
+  },
+  {
+    year: 2018,
+    events: [
+      'First career as a Front End Developer under apprenticeship program',
+      'Learned React, NextJS, TailwindCSS, and TypeScript',
+      'Studied the world of JavaScript frameworks',
+    ],
+  },
+];
 
 const About = () => {
-  const [isExpanded, setIsExpanded] = useState(false);
+  const lineControls = useAnimation();
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+  
+  const calculateLineProgress = () => {
+    const scrollPosition = window.scrollY;
+    const windowHeight = window.innerHeight;
+    const documentHeight = document.documentElement.scrollHeight;
+    const progress = scrollPosition / (documentHeight - windowHeight);
 
-  const containerVariants = {
-    initial: {
-      height: "auto",
-      width: "200px",
-      padding: "1rem",
-      cursor: "pointer",
-    },
-    expanded: {
-      height: "auto",
-      width: "100%",
-      padding: "2rem",
-      cursor: "default",
-      transition: {
-        duration: 0.5,
-        ease: "easeInOut",
-      },
-    },
-    collapsed: {
-      height: "auto",
-      width: "200px",
-      padding: "1rem",
-      cursor: "pointer",
-      transition: {
-        delay: 0.3,
-        duration: 0.5,
-        ease: "easeInOut",
-      },
-    },
+    lineControls.set({ height: `${Math.min(progress * 150, 100)}%` });
   };
 
-  const textVariants = {
-    initial: {
-      opacity: 0,
-    },
-    expanded: {
-      opacity: 1,
-      transition: {
-        delay: 0.3,
-        duration: 0.5,
-        ease: "easeInOut",
-      },
-    },
-    collapsed: {
-      opacity: 0,
-      transition: {
-        duration: 0.3,
-        ease: "easeInOut",
-      },
-    },
-  };
+  useEffect(() => {
+    window.addEventListener('scroll', calculateLineProgress);
+    return () => {
+      window.removeEventListener('scroll', calculateLineProgress);
+    };
+  }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center p-4">
-      <motion.div
-        className="max-w-lg bg-background border font-bold text-center text-xl text-foreground rounded-lg"
-        variants={containerVariants}
-        initial="initial"
-        animate={isExpanded ? "expanded" : "collapsed"}
-        onClick={() => setIsExpanded(!isExpanded)}
-      >
-        <motion.p className="py-2">Who Am I?</motion.p>
-        <AnimatePresence>
-          {isExpanded && (
+    
+    <motion.div
+        ref={ref}
+        className="flex flex-col items-center justify-center p-12"
+        initial={{ opacity: 0 }}
+        animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+        transition={{ duration: 0.6, ease: 'easeOut' }}
+        >
+        <motion.h1
+          className="text-2xl font-bold"
+          initial={{ y: -20, opacity: 0 }}
+          animate={isInView ? { y: 0, opacity: 1 } : { y: -20, opacity: 0 }}
+          transition={{ duration: 0.6, ease: 'easeOut', delay: 0.2 }}
+        >
+          My Timeline
+        </motion.h1>
+      <div className="divide-zinc-800 relative">
+        <motion.div
+          className="absolute h-full w-[4px] bg-gradient-to-b from-transparent from-0% via-foreground via-95% to-transparent -left-4 md:-left-10"
+          initial={{ height: 0 }}
+          animate={lineControls}
+        ></motion.div>
+        {experiences.map((experience) => {
+          const sectionRef = useRef(null);
+          const isInView = useInView(sectionRef, { once: true });
+
+          return (
             <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.5, ease: "easeInOut" }}
+              key={experience.year}
+              ref={sectionRef}
+              className="border-b border-zinc-800"
+              initial={{ opacity: 0 }}
+              animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+              transition={{ duration: 0.5, ease: 'easeOut', delay: 0.2 }}
             >
-              <motion.h1
-                className="text-2xl font-bold text-foreground mt-4"
-                variants={textVariants}
-                initial="initial"
-                animate="expanded"
-                exit="collapsed"
-              >
-                My Name is Andi
-              </motion.h1>
-              <motion.p
-                className="text-foreground font-normal text-sm mt-2"
-                variants={textVariants}
-                initial="initial"
-                animate="expanded"
-                exit="collapsed"
-              >
-                Hello! I'm Andi, a passionate Front End Developer with a love for creating beautiful and functional web applications. I specialize in React, NextJs, TypeScript, and Tailwind CSS. Although I am knowledgable in all frameworks.
-                I've started my Front End development journey back in high school learning jQuery, which quickly grew into learning React. Over time, I got myself an apprenticeship at a local company to further hone my skills. After deciding to
-                pursue my education, I quickly learned more about Computer Science and what it is. And now with a completed degree in Computer Science, as well as experience within the industry, I am ready to tackle any project that I am given!
-              </motion.p>
+              <h1 className="text-xl font-bold text-foreground my-8 relative">
+                <motion.div
+                  className="h-3 md:h-4 w-3 md:w-4 border-2 border-foreground bg-background rounded-full absolute -left-[20px] md:-left-[46px] top-2 md:top-1"
+                  initial={{ pathLength: 0 }}
+                  animate={isInView ? { pathLength: 1 } : { pathLength: 0 }}
+                  transition={{ duration: 0.5, ease: 'easeInOut' }}
+                ></motion.div>
+                <motion.span
+                  initial={{ x: 20, opacity: 0 }}
+                  animate={isInView ? { x: 0, opacity: 1 } : { x: 20, opacity: 0 }}
+                  transition={{ duration: 0.5, ease: 'easeOut', delay: 0.2 }}
+                >
+                  {experience.year}
+                </motion.span>
+              </h1>
+              <div className="mb-8">
+                {experience.events.map((event, index) => (
+                  <motion.div
+                    key={index}
+                    className="flex flex-row space-x-2 items-start my-2"
+                    initial={{ x: 20, opacity: 0 }}
+                    animate={isInView ? { x: 0, opacity: 1 } : { x: 20, opacity: 0 }}
+                    transition={{ duration: 0.5, ease: 'easeOut', delay: 0.2 }}
+                  >
+                    <svg stroke="currentColor" fill="none" strokeWidth="1.5" viewBox="0 0 24 24" aria-hidden="true" className="text-foreground mt-[3px] flex-shrink-0" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <span className="text-zinc-400 text-sm md:text-base">{event}</span>
+                  </motion.div>
+                ))}
+              </div>
             </motion.div>
-          )}
-        </AnimatePresence>
-      </motion.div>
-    </div>
+          );
+        })}
+      </div>
+    </motion.div>
   );
 };
 

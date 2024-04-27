@@ -20,7 +20,7 @@ export const HoverEffect = ({
   return (
     <div
       className={cn(
-        "overflow-hidden animate-load-in-from-bottom grid grid-cols-1 md:grid-cols-2  lg:grid-cols-3  py-10",
+        "overflow-hidden grid grid-cols-1 md:grid-cols-2  lg:grid-cols-3  py-10",
         className
       )}
     >
