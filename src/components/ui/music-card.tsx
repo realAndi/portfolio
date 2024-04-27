@@ -55,19 +55,19 @@ const MusicCard = () => {
   const isLoading = currentValidating || (shouldFetchRecent && recentValidating);
 
   if (isLoading) {
-    return <div className="h-[125px] w-full md:w-96 bg-background shadow-lg rounded-lg p-4 flex items-center justify-center">
+    return <div className="h-[125px] w-80 md:w-96 bg-background shadow-lg rounded-lg p-4 flex items-center justify-center">
       <p className="text-lg text-gray-600">Loading Spotify Data...</p>
     </div>;
   }
 
   if (!data) {
-    return <div className="h-[125px] w-full md:w-96 bg-background shadow-lg rounded-lg p-4 flex items-center justify-center">
+    return <div className="h-[125px] w-80 md:w-96 bg-background shadow-lg rounded-lg p-4 flex items-center justify-center">
       <p className="text-lg text-gray-600">Not listening to anything</p>
     </div>;
   }
 
   return (
-    <div className="w-full md:w-96 bg-background shadow-lg rounded-lg p-4 flex items-center">
+    <div className="w-80 md:w-96 bg-background shadow-lg rounded-lg p-4 flex items-center">
       {data && (
         <>
           <div className="flex-shrink-0 ">
