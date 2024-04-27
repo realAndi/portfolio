@@ -27,6 +27,7 @@ const config = {
       },
     },
     extend: {
+      textOverflow: ['responsive'],
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

@@ -94,7 +94,7 @@ const About = () => {
         >
           My Timeline
         </motion.h1>
-      <div className="divide-zinc-800 relative">
+      <div className="dark:divide-zinc-800 divide-neutral-300 relative">
         <motion.div
           className="absolute h-full w-[4px] bg-gradient-to-b from-transparent from-0% via-foreground via-95% to-transparent -left-4 md:-left-10"
           initial={{ height: 0 }}

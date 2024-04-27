@@ -1,8 +1,12 @@
+import { useState, useEffect } from "react";
 import profilePic from "@/imgs/me.webp";
 import { DirectionAwareHover } from "@/components/ui/direction-aware-hover";
 import { Button } from "@/components/ui/button";
+import MusicCard from "@/components/ui/music-card";
 
 const Banner = () => {
+
+
     const scrollToProjects = () => {
         const projectsSection = document.getElementById('projects');
         if (projectsSection) {
@@ -23,12 +27,12 @@ const Banner = () => {
             </Button>
         </div>
       </div>
-      <div className="animate-load-in-from-right self-center">
+      <div className="flex flex-col animate-load-in-from-right items-center self-center gap-8">
         <DirectionAwareHover imageUrl={profilePic} className="shadow-lg">
           <p className="font-bold text-xl">It's Andi</p>
           <p className="font-normal text-sm">Photo by Yoonji Cho</p>
         </DirectionAwareHover>
-
+        <MusicCard />
       </div>
     </main>
   );
