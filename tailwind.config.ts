@@ -113,13 +113,21 @@ const config = {
           "0%": { opacity: '0', transform: "translateY(20px)" },
           "100%": { opacity: '1', transform: "translateY(0)" },
         },
+        "slide-in-from-left": {
+          "0%": { transform: "translateX(-100%)" },
+          "100%": { transform: "translateX(0)" },
+        },
+        "load-in-from-left": {
+          "0%": { transform: "translateX(-20px)", opacity: "0" },
+          "100%": { transform: "translateX(0)", opacity: "1" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        'slide-in-from-left': 'slideInFromLeft 0.1s ease-out',
+        'slide-in-from-left': 'slide-in-from-left 0.3s ease-out',
         'slide-out-to-left': 'slideOutToLeft 0.1s ease-out',
-        'load-in-from-left': 'loadInFromLeft 1s ease-in-out',
+        'load-in-from-left': 'load-in-from-left 0.3s ease-out forwards',
         'load-in-from-right': 'loadInFromRight 1s ease-in-out',
         'load-in-from-bottom': 'loadInFromBottom 1s ease-in-out',
         'load-in-from-top': 'loadInFromTop 1s ease-in-out',

@@ -8,6 +8,7 @@ const experiences = [
       'Designed Menu\'s for local restaurants and cafe\'s.',
       'Published first NPM package for React, giving the ability to implement an Odometer easily onto any project',
       'Self-taught Firebase and further into AWS, learning about back-end design and efficient data management',
+      'Started career as IT Technician at The Walt Disney Company',
       'Bought my first car which I am very proud to write here',
     ],
   },

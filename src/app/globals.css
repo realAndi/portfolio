@@ -64,3 +64,33 @@
   .animation-delay-200 {
     animation-delay: 0.2s;
   }
+
+  .card-stack {
+    perspective: 1000px;
+    transform-style: preserve-3d;
+  }
+
+  .playing-card {
+    aspect-ratio: 3/4;
+    border-radius: 0.85rem;
+    background: linear-gradient(
+      135deg,
+      hsl(var(--card) / 0.95) 0%,
+      hsl(var(--card) / 0.7) 100%
+    );
+    border: 2px solid hsl(var(--border));
+    box-shadow: 
+      0 0 0 1px rgba(0, 0, 0, 0.05),
+      0 10px 15px -3px rgba(0, 0, 0, 0.1),
+      0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  }
+
+  /* Update selectors for HTML entities */
+  [dangerouslySetInnerHTML*="&hearts;"],
+  [dangerouslySetInnerHTML*="&diams;"] {
+    color: red; /* Using destructive color for red suits */
+  }
+
+  [data-color="red"] {
+    color: rgb(220, 38, 38); /* or any red color you prefer */
+  }
