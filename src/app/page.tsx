@@ -12,7 +12,7 @@ import About from "@/components/About";
 
 export default function Home() {
   return (
-    <div className="flex flex-col min-h-screen dark:bg-black bg-white dark:bg-grid-small-white/[0.15] bg-grid-small-black/[0.15] relative flex">
+    <div className="flex flex-col min-h-screen dark:bg-background bg-white dark:bg-grid-small-white/[0.15] bg-grid-small-black/[0.15] relative flex">
       <Header />
       <Banner />
       <About />

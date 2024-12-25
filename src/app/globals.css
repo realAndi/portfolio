@@ -28,11 +28,11 @@
     }
   
     .dark {
-      --background: 240 10% 3.9%;
+      --background: 230 50% 3.9%;
       --foreground: 0 0% 98%;
-      --card: 240 10% 3.9%;
+      --card: 249, 48%, 5%;
       --card-foreground: 0 0% 98%;
-      --popover: 240 10% 3.9%;
+      --popover: 230 50% 3.9%;
       --popover-foreground: 0 0% 98%;
       --primary: 0 0% 98%;
       --primary-foreground: 240 5.9% 10%;
@@ -73,11 +73,7 @@
   .playing-card {
     aspect-ratio: 3/4;
     border-radius: 0.85rem;
-    background: linear-gradient(
-      135deg,
-      hsl(var(--card) / 0.95) 0%,
-      hsl(var(--card) / 0.7) 100%
-    );
+    background: hsl(var(--card));
     border: 2px solid hsl(var(--border));
     box-shadow: 
       0 0 0 1px rgba(0, 0, 0, 0.05),

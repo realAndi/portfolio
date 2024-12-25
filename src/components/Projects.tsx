@@ -188,6 +188,9 @@ function SwipeableCard() {
                     A smooth card swiping animation built with <span className="text-blue-500"><u><b><a href="https://www.npmjs.com/package/framer-motion" target="_blank" rel="noopener noreferrer">Framer Motion</a></b></u></span>. Cards can be swiped left or right, 
                     with rotation based on swipe direction. When released, cards automatically animate to their new position.
                   </p>
+                  <p className="text-xs text-muted-foreground">
+                    Yes I made my own code-block component, I'm proud of it.
+                  </p>
                 </div>
               </DialogHeader>
               
