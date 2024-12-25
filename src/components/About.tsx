@@ -64,7 +64,7 @@ const About = () => {
   return (
     <motion.div
       ref={ref}
-      className="flex flex-col items-center justify-center p-12"
+      className="flex flex-col items-center justify-center p-12 overflow-hidden w-full"
       initial={{ opacity: 0 }}
       animate={isInView ? { opacity: 1 } : { opacity: 0 }}
       transition={{ duration: 0.6, ease: 'easeOut' }}
@@ -78,7 +78,7 @@ const About = () => {
         My Timeline
       </motion.h1>
 
-      <div className="max-w-4xl w-full space-y-8">
+      <div className="max-w-4xl w-full space-y-8 overflow-hidden">
         {experiences.map((experience, experienceIndex) => {
           const sectionRef = useRef(null);
           const isInView = useInView(sectionRef, { once: true });
@@ -88,17 +88,17 @@ const About = () => {
             <motion.div
               key={experience.year}
               ref={sectionRef}
-              className={`flex items-start gap-8 ${isEven ? 'flex-row' : 'flex-row-reverse'} md:mx-8`}
+              className={`flex items-start gap-8 ${isEven ? 'flex-row' : 'flex-row-reverse'} md:mx-8 w-full`}
               initial={{ 
-                x: isEven ? -100 : 100,
-                opacity: 0
+                opacity: 0,
+                x: 0
               }}
               animate={isInView ? {
-                x: 0,
-                opacity: 1
+                opacity: 1,
+                x: 0
               } : {
-                x: isEven ? -100 : 100,
-                opacity: 0
+                opacity: 0,
+                x: 0
               }}
               transition={{ 
                 duration: 0.5,
