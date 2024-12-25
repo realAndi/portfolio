@@ -2,6 +2,8 @@
 
 My portfolio website to showcase my timeline of projects and experiences. Where I can also play around with fun Front-End UI/UX.
 
+https://reallyitsandi.com/
+
 ### Dependencies
 * shadCn
 * framer-motion
