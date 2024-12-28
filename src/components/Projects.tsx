@@ -113,43 +113,105 @@ export const projects = [
       }
     };
 
-    const codeSnippet = `const SWIPE_THRESHOLD = 100;
-const ROTATION_RANGE = 25;
+    const codeSnippet = `import { motion, useMotionValue, useTransform, useAnimation, AnimatePresence } from 'framer-motion';
 
-function SwipeableCard() {
+const SWIPE_THRESHOLD = 100; // minimum distance to trigger swipe
+const ROTATION_RANGE = 25; // maximum rotation in degrees
+
+interface Project {
+  title: string;
+  description: string;
+  tags: string[];
+}
+
+interface Props {
+  projects: Project[];
+}
+
+export function SwipeableCards({ projects }: Props) {
+  const [projectStack, setProjectStack] = useState(projects);
+  
   const x = useMotionValue(0);
   const y = useMotionValue(0);
   const rotate = useTransform(x, [-200, 200], [-ROTATION_RANGE, ROTATION_RANGE]);
   const controls = useAnimation();
 
-  const handleDragEnd = async (event, info) => {
+  const handleDragEnd = async (event: any, info: any) => {
     const offset = info.offset.x;
     const velocity = info.velocity.x;
 
     if (Math.abs(offset) > SWIPE_THRESHOLD || Math.abs(velocity) > 500) {
+      // Determine direction and animate card off screen
       const direction = offset > 0 ? 1 : -1;
       await controls.start({
         x: direction * window.innerWidth * 1.5,
         rotate: direction * ROTATION_RANGE,
         transition: { duration: 0.4 }
       });
-      // Handle card swap logic here
+
+      // Move first card to end of stack
+      setProjectStack(stack => {
+        const [first, ...rest] = stack;
+        return [...rest, first];
+      });
+
+      // Reset position for next card
+      controls.set({ x: 0, y: 0, rotate: 0 });
     } else {
+      // Return to center if not swiped far enough
       controls.start({ x: 0, y: 0, rotate: 0 });
     }
   };
 
   return (
-    <motion.div
-      style={{ x, y, rotate }}
-      animate={controls}
-      drag
-      dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
-      onDragEnd={handleDragEnd}
-    >
-      {/* Card content */}
-    </motion.div>
-  );}`;
+    <div className="relative w-full max-w-[320px] h-[420px]">
+      <AnimatePresence mode="popLayout">
+        {projectStack.slice(0, 4).map((project, index) => (
+          <motion.div
+            key={project.title}
+            style={{
+              x: index === 0 ? x : 0,
+              y: index === 0 ? y : 0,
+              rotate: index === 0 ? rotate : 0,
+              zIndex: projectStack.length - index,
+              filter: \`blur(\${index * 2}px)\`,
+            }}
+            animate={{
+              ...((index === 0 && controls) || {}),
+              scale: 1 - index * 0.05,
+              y: index * -20,
+              opacity: 1 - index * 0.15,
+            }}
+            drag={index === 0}
+            dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
+            onDragEnd={handleDragEnd}
+            initial={index === projectStack.length - 1 ? { scale: 0, y: 100 } : false}
+            transition={{ duration: 0.3 }}
+            className="absolute inset-0 bg-card border-2 rounded-xl shadow-xl p-5 
+              cursor-grab active:cursor-grabbing backdrop-blur-sm"
+          >
+            <div className="h-full flex flex-col justify-between">
+              <div>
+                <h3 className="text-xl font-bold mb-3">{project.title}</h3>
+                <div className="flex flex-wrap gap-1.5 mb-3">
+                  {project.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="px-2 py-0.5 bg-primary/10 text-primary rounded-md text-xs"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                <p className="text-muted-foreground text-sm">{project.description}</p>
+              </div>
+            </div>
+          </motion.div>
+        ))}
+      </AnimatePresence>
+    </div>
+  );
+}`;
 
     return (
       <motion.div
