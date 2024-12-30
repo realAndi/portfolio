@@ -25,6 +25,13 @@ export const projects = [
       tags: ["nextjs", "typescript", "supabase"]
     },
     {
+      title: "doesmyipcam.work",
+      description:
+        "A simple PWA to view your Sharx IP camera feed via MJPEG.",
+      link: "https://doesmyipcam.work",
+      tags: ["nextjs", "typescript"]
+    },
+    {
       title: "PWAChat",
       description:
         "PWAChat is a Progressive Web App that allows you to be in 1 conjoined group chat with your friends, hosted on your own domain, database, and server. This project is currently under development.",
