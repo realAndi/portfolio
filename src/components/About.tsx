@@ -3,6 +3,16 @@ import { motion, useInView, useAnimation } from 'framer-motion';
 
 const experiences = [
   {
+    year: 2025,
+    events: [
+      'Finished 10 months of my contract as a IT Technician at The Walt Disney Company',
+      'Currently developing my own projects and working on my own startup, Speck (TBD)',
+      'Picked up skiing as a hobby, which I am very passionate about',
+      'Currently learning BrightScript to enter the world of Roku',
+      'Looking for new ways to revolutionize development for the next generation to come'
+    ],
+  },
+  {
     year: 2024,
     events: [
       'Designed Menu\'s for local restaurants and cafe\'s.',
