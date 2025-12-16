@@ -60,7 +60,7 @@ interface FilterConfig {
 export function PhotoEditor({ imageUrl, className }: PhotoEditorProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [selectedFilter, setSelectedFilter] = useState<keyof FilterValues>('exposure');
-  const scrollTimeout = useRef<NodeJS.Timeout>();
+  const scrollTimeout = useRef<NodeJS.Timeout>(undefined);
   const imageRef = useRef<HTMLDivElement>(null);
 
   const handleScroll = () => {
