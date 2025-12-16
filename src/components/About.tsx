@@ -1,167 +1,225 @@
-import React, {useRef, useEffect } from 'react';
-import { motion, useInView, useAnimation } from 'framer-motion';
+'use client';
+
+import React, { useRef } from 'react';
+import { motion, useInView, useScroll, useTransform } from 'framer-motion';
 
 const experiences = [
   {
     year: 2025,
     events: [
-      'Finished 10 months of my contract as a IT Technician at The Walt Disney Company',
-      'Currently developing my own projects and working on my own startup, Speck (TBD)',
-      'Picked up skiing as a hobby, which I am very passionate about',
-      'Currently learning BrightScript to enter the world of Roku',
-      'Looking for new ways to revolutionize development for the next generation to come'
+      '1+ years at The Walt Disney Company as IT Technician',
+      'Developed internal tools across all Disney offices for IT analysts to utilize',
+      'Developing Speck — finance management for friends and businesses',
+      'Exploring BrightScript for Roku channel development',
+      'Developed Doccy — a CLI documentation generator powered by AI agents',
+      'Picked up skiing as a new passion',
     ],
   },
   {
     year: 2024,
     events: [
-      'Designed Menu\'s for local restaurants and cafe\'s.',
-      'Published first NPM package for React, giving the ability to implement an Odometer easily onto any project',
-      'Self-taught Firebase and further into AWS, learning about back-end design and efficient data management',
-      'Started career as IT Technician at The Walt Disney Company',
-      'Bought my first car which I am very proud to write here',
+      'Published first NPM package: EZOdometer-react',
+      'Started IT Technician role at The Walt Disney Company',
+      'Designed menus for local restaurants and cafés',
+      'Self-taught Firebase and expanded AWS knowledge',
     ],
   },
   {
     year: 2023,
     events: [
-      'Started full time as a Data Analyst for MOT Restaurant Group',
-      'OpenAI released, developed many fun projects utilizing OpenAI\'s API',
-      'Graduated from Pace University, BA in Computer Science, Minor in Mathematics',
-      'Self-taught UI/UX Design, further strenghting my skills in Figma',
-      'Learned Web Scraping with Python and created a Reddit Web Scraper to get popular posts and make TikTok narration videos out of them',
+      'Graduated from Pace University — BA in Computer Science, Minor in Mathematics',
+      'Full-time Data Analyst at MOT Restaurant Group',
+      'Built several OpenAI-powered applications',
+      'Created Reddit web scraper for TikTok content generation',
     ],
   },
   {
     year: 2022,
     events: [
-      'Developed first Android App as a part of my academic project, further strenghting my skills in Java',
-      'Completed all necessary Computer Science courses for my academic career',
-      'Data Analytics job offered full time position, starting early 2023.',
+      'Developed first Android app as academic project',
+      'Completed Computer Science coursework',
+      'Offered full-time Data Analytics position',
     ],
   },
   {
     year: 2021,
     events: [
-      'Picked up part-time IT Help Desk job at a local company',
-      'Achieved Front End Development Internship, further enhancing React and NextJS skills',
-      'Started 2nd part-time job as a Data Analyst for a local restaurant company, further strenghting my skills and experience in SQL',
-      'Created the Albanian Software Engineering Club for all Albanian Students in Pace University',
+      'Front-end Development Internship — enhanced React and Next.js skills',
+      'Part-time Data Analyst role — strengthened SQL expertise',
+      'Founded Albanian Software Engineering Club at Pace University',
     ],
   },
   {
     year: 2020,
     events: [
-      'Started my academic career at Pace University, pursuing a BA in Computer Science',
-      'Discovered the world of Cloud Deployment with AWS',
-      'Learned the world of OOP and Data Structures',
+      'Started BA in Computer Science at Pace University',
+      'Discovered AWS cloud deployment',
+      'Learned OOP and Data Structures fundamentals',
     ],
   },
   {
     year: 2018,
     events: [
-      'First career as a Front End Developer under apprenticeship program',
-      'Learned React, NextJS, TailwindCSS, and TypeScript',
-      'Studied the world of JavaScript frameworks',
+      'First role as Front-end Developer (apprenticeship)',
+      'Learned React, Next.js, TailwindCSS, and TypeScript',
     ],
   },
 ];
 
 const About = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true });
+  const containerRef = useRef<HTMLElement>(null);
+  const isInView = useInView(containerRef, { once: true, margin: "-100px" });
+
+  // Parallax for background elements
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  });
+
+  const backgroundY = useTransform(scrollYProgress, [0, 1], [0, -100]);
+  const orbY = useTransform(scrollYProgress, [0, 1], [0, -150]);
 
   return (
-    <motion.div
-      ref={ref}
-      className="flex flex-col items-center justify-center p-12 overflow-hidden w-full"
-      initial={{ opacity: 0 }}
-      animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-      transition={{ duration: 0.6, ease: 'easeOut' }}
-    >
-      <motion.h1
-        className="text-2xl font-bold mb-16"
-        initial={{ y: -20, opacity: 0 }}
-        animate={isInView ? { y: 0, opacity: 1 } : { y: -20, opacity: 0 }}
-        transition={{ duration: 0.6, ease: 'easeOut', delay: 0.2 }}
-      >
-        My Timeline
-      </motion.h1>
+    <section ref={containerRef} className="relative py-24 sm:py-32 overflow-hidden">
+      {/* Background */}
+      <div className="absolute inset-0 bg-secondary/30" />
 
-      <div className="max-w-4xl w-full space-y-8 overflow-hidden">
-        {experiences.map((experience, experienceIndex) => {
-          const sectionRef = useRef(null);
-          const isInView = useInView(sectionRef, { once: true });
-          const isEven = experienceIndex % 2 === 0;
+      {/* Floating Orbs with scroll parallax */}
+      <motion.div
+        style={{ y: orbY }}
+        className="floating-orb floating-orb-accent w-[400px] h-[400px] -top-32 -left-32 opacity-25 hidden lg:block"
+      />
+      <motion.div
+        style={{ y: backgroundY }}
+        className="floating-orb floating-orb-primary w-[300px] h-[300px] bottom-20 -right-20 opacity-20 hidden lg:block animate-float-slow"
+      />
 
-          return (
+      {/* Geometric shapes */}
+      <div className="floating-shape shape-ring w-40 h-40 top-1/4 right-[10%] hidden lg:block animate-drift opacity-30" />
+      <div className="floating-shape shape-square w-20 h-20 bottom-1/4 left-[5%] hidden lg:block animate-float-medium opacity-25" />
+      <div className="floating-shape shape-ring w-16 h-16 top-[60%] right-[25%] hidden lg:block animate-float-slow opacity-20" />
+
+      <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-8">
+        {/* Section Header */}
+        <motion.div
+          className="mb-16 sm:mb-20"
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <span className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.2em] text-muted-foreground mb-4">
+            <span className="w-8 h-px bg-primary" />
+            Career Path
+          </span>
+          <h2 className="font-display text-4xl sm:text-5xl tracking-tight">
+            The Journey
+          </h2>
+        </motion.div>
+
+        {/* Timeline */}
+        <div className="relative">
+          {/* Vertical Line - Enhanced with glow */}
+          <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px md:-translate-x-1/2">
+            <div className="absolute inset-0 bg-border" />
             <motion.div
-              key={experience.year}
-              ref={sectionRef}
-              className={`flex items-start gap-8 ${isEven ? 'flex-row' : 'flex-row-reverse'} md:mx-8 w-full`}
-              initial={{ 
-                opacity: 0,
-                x: 0
-              }}
-              animate={isInView ? {
-                opacity: 1,
-                x: 0
-              } : {
-                opacity: 0,
-                x: 0
-              }}
-              transition={{ 
-                duration: 0.5,
-                type: "spring",
-                stiffness: 100
-              }}
-            >
-              {/* Year Block */}
-              <div className="flex-shrink-0 w-24 md:w-32">
-                <motion.div
-                  className="bg-primary/10 p-3 rounded-lg"
-                  initial={{ scale: 0.8 }}
-                  animate={isInView ? { scale: 1 } : { scale: 0.8 }}
-                  transition={{ delay: 0.2 }}
-                >
-                  <span className="text-xl md:text-2xl font-bold text-primary">
-                    {experience.year}
-                  </span>
-                </motion.div>
-              </div>
+              className="absolute inset-0 bg-gradient-to-b from-primary/50 via-primary/30 to-transparent"
+              initial={{ scaleY: 0 }}
+              animate={isInView ? { scaleY: 1 } : {}}
+              transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
+              style={{ transformOrigin: 'top' }}
+            />
+          </div>
 
-              {/* Events Block */}
-              <div className="flex-1 space-y-4 bg-secondary/20 rounded-lg p-4">
-                {experience.events.map((event, index) => (
-                  <motion.div
-                    key={index}
-                    className="flex items-start gap-3"
-                    initial={{ y: 20, opacity: 0 }}
-                    animate={isInView ? { y: 0, opacity: 1 } : { y: 20, opacity: 0 }}
-                    transition={{
-                      duration: 0.4,
-                      delay: index * 0.1,
-                    }}
-                  >
-                    <motion.div
-                      initial={{ scale: 0 }}
-                      animate={isInView ? { scale: 1 } : { scale: 0 }}
-                      transition={{ delay: index * 0.1 + 0.2 }}
-                      className="mt-2.5 flex-shrink-0"
+          <div className="space-y-12 sm:space-y-16">
+            {experiences.map((experience, experienceIndex) => {
+              const isEven = experienceIndex % 2 === 0;
+
+              return (
+                <motion.div
+                  key={experience.year}
+                  className="relative"
+                  initial={{ opacity: 0, y: 40 }}
+                  animate={isInView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ duration: 0.5, delay: experienceIndex * 0.1, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  <div className="md:grid md:grid-cols-2 md:gap-16 items-start">
+                    {/* Year Badge */}
+                    <div
+                      className={`flex ${isEven ? 'md:justify-end' : 'md:order-2 md:justify-start'} mb-4 md:mb-0`}
                     >
-                      <div className="h-[1px] w-3 bg-primary/50" />
-                    </motion.div>
-                    <span className="text-muted-foreground text-sm">
-                      {event}
-                    </span>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-          );
-        })}
+                      <div className="relative pl-8 md:pl-0">
+                        {/* Dot on timeline - Enhanced */}
+                        <motion.div
+                          className="absolute left-0 md:left-auto md:right-[-2.5rem] md:top-2 hidden md:block"
+                          initial={{ scale: 0 }}
+                          animate={isInView ? { scale: 1 } : {}}
+                          transition={{ duration: 0.4, delay: experienceIndex * 0.1 + 0.2, type: "spring" }}
+                        >
+                          <div className="w-3 h-3 rounded-full bg-primary border-4 border-background shadow-depth-sm" />
+                          <div className="absolute inset-0 w-3 h-3 rounded-full bg-primary/50 animate-pulse-glow" />
+                        </motion.div>
+                        <div className="absolute left-[-1px] top-2 w-2 h-2 rounded-full bg-primary md:hidden" />
+
+                        <motion.span
+                          className="font-display text-5xl sm:text-6xl text-foreground/10"
+                          whileHover={{ scale: 1.05, color: 'hsl(var(--primary) / 0.2)' }}
+                          transition={{ duration: 0.2 }}
+                        >
+                          {experience.year}
+                        </motion.span>
+                      </div>
+                    </div>
+
+                    {/* Events - Enhanced cards */}
+                    <div className={`${isEven ? '' : 'md:order-1 md:text-right'} pl-8 md:pl-0`}>
+                      <div className="space-y-3">
+                        {experience.events.map((event, index) => (
+                          <motion.div
+                            key={index}
+                            className={`flex items-start gap-3 ${isEven ? '' : 'md:flex-row-reverse'}`}
+                            initial={{ opacity: 0, x: isEven ? -20 : 20 }}
+                            animate={isInView ? { opacity: 1, x: 0 } : {}}
+                            transition={{
+                              duration: 0.4,
+                              delay: experienceIndex * 0.1 + index * 0.05,
+                              ease: [0.22, 1, 0.36, 1]
+                            }}
+                          >
+                            <motion.span
+                              className="flex-shrink-0 w-1.5 h-1.5 mt-2 rounded-full bg-primary/50"
+                              whileHover={{ scale: 1.5, backgroundColor: 'hsl(var(--primary))' }}
+                            />
+                            <motion.p
+                              className="text-muted-foreground text-sm leading-relaxed glass-subtle rounded-lg px-3 py-2 hover:bg-background/50 transition-colors touch-feedback"
+                              whileHover={{ x: isEven ? 4 : -4 }}
+                              transition={{ duration: 0.2 }}
+                            >
+                              {event}
+                            </motion.p>
+                          </motion.div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+
+          {/* End marker */}
+          <motion.div
+            className="absolute left-0 md:left-1/2 bottom-0 md:-translate-x-1/2 translate-y-full pt-4"
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : {}}
+            transition={{ duration: 0.6, delay: 0.8 }}
+          >
+            <div className="text-xs text-muted-foreground uppercase tracking-widest hidden md:block">
+              The beginning
+            </div>
+          </motion.div>
+        </div>
       </div>
-    </motion.div>
+    </section>
   );
 };
 
